@@ -4,11 +4,11 @@ import { useState } from "react";
 import { closeModal, useAppDispatch, useAppSelector, isModalOpennable } from "../hooks/store";
 import { useSelector, useDispatch } from 'react-redux'
 
-const useModal = () => {
+const useModal = (action: () => void) => {
 
     const ref = useRef<HTMLDivElement>(null);
   
-    const dispatch = useAppDispatch()
+
 
 
 
@@ -16,7 +16,8 @@ const useModal = () => {
 
         var handleClickOutside = (e: MouseEvent) => {
             if ( ref.current && !ref.current.contains(e.target as Node)) {
-              dispatch(closeModal())
+             action()
+            
              
             } 
         }

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-sdk/client-apigatewaymanagementapi": "^3.438.0",
     "@aws-sdk/client-dynamodb": "^3.433.0",
     "@aws-sdk/client-s3": "^3.433.0",
     "@aws-sdk/lib-dynamodb": "^3.433.0",
@@ -20,6 +21,14 @@
     "@editorjs/paragraph": "^2.11.3",
     "@editorjs/table": "^2.2.2",
     "@reduxjs/toolkit": "^1.9.7",
+    "@tiptap/pm": "^2.1.12",
+    "@tiptap/react": "^2.1.12",
+    "@tiptap/starter-kit": "^2.1.12",
+    "@types/jsonwebtoken": "^9.0.5",
+    "amazon-cognito-identity-js": "^6.3.7",
+    "aws-amplify": "^5.3.11",
+    "aws-sdk": "^2.1536.0",
+    "jsonwebtoken": "^9.0.2",
     "next": "13.5.4",
     "react": "^18",
     "react-dom": "^18",
