@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useMemo, useRef } from "react";
 import useCover from "@/app/hooks/use-cover";
 import { useState } from "react";
-import { CoverOption } from "./coveroptions";
+import  CoverOption  from "./coveroptions";
 import { memo } from "react";
 
 const Cover = memo(
@@ -63,5 +63,5 @@ const Cover = memo(
     );
   }
 );
-
+Cover.displayName = "Cover"
 export default Cover;

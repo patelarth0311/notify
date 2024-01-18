@@ -41,7 +41,7 @@ import {
 import { useState } from "react";
 import { getSummary } from "@/app/requests";
 import { current } from "@reduxjs/toolkit";
-import { socket } from "@/app/requests";
+
 import {
   useAppDispatch,
   setADocument,

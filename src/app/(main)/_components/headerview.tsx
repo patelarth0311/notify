@@ -11,12 +11,12 @@ import { useContext, useEffect, useState } from "react";
 import { Document, getDocument } from "@/app/requests";
 import Cover from "./cover";
 import Image from "next/image";
-import { CoverOption } from "./coveroptions";
+import CoverOption  from "./coveroptions";
 import Skeleton from "./skeleton";
 import { useMemo } from "react";
 import { useCallback } from "react";
 import { setADocument, useAppDispatch } from "@/app/hooks/store";
-import { socket } from "@/app/requests";
+
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 import { useToast } from "@/app/hooks/useToast";
 import { UserContext } from "@/app/context";

@@ -13,18 +13,18 @@ import { useContext, useEffect, useState } from "react";
 import { memo } from "react";
 import { useRef } from "react";
 import { LegacyRef } from "react";
-import { socket } from "@/app/requests";
+
 import { Document } from "@/app/requests";
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 import { useAppDispatch, setADocument } from "@/app/hooks/store";
 import { useToast } from "@/app/hooks/useToast";
 import { UserContext } from "@/app/context";
-interface CoverOption {
+interface CoverOptionProps {
   documentId: string;
   type: "Change cover" | "Add cover";
 }
 
-export const CoverOption = memo(({ documentId, type }: CoverOption) => {
+const CoverOption = memo(({ documentId, type }: CoverOptionProps) => {
   const client = new DynamoDBClient({
     region: "us-east-1",
     credentials: {
@@ -113,3 +113,7 @@ export const CoverOption = memo(({ documentId, type }: CoverOption) => {
     </div>
   );
 });
+
+CoverOption.displayName = "CoverOption"
+
+export default CoverOption;

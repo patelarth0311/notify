@@ -23,7 +23,7 @@ import {
 import { fetchChatHistory } from "@/app/requests";
 import { Block, BlockNoteEditor, PartialBlock } from "@blocknote/core";
 import useModal from "@/app/hooks/use-modal";
-import { Option } from "../(routes)/documents/page";
+import { Option } from "./option";
 
 
 function AIInput({ editor }: { editor: BlockNoteEditor }) {

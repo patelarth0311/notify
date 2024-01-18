@@ -11,6 +11,7 @@ import { memo } from "react";
 import Skeleton from "./skeleton";
 
 import { Island } from "./island";
+
 interface NavbarProps {
   children: React.ReactNode;
   title: string;
@@ -67,5 +68,5 @@ const Navbar = memo(({ children, title, loading }: NavbarProps) => {
     </nav>
   );
 });
-
+Navbar.displayName = "Navbar"
 export default Navbar;

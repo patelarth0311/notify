@@ -27,29 +27,10 @@ import {
   setPaginatedRecentsDocuments,
   setPaginatedAllDocuments,
 } from "@/app/hooks/store";
-import { socket } from "@/app/requests";
 
-interface OptionProps {
-  icon: string;
-  action: () => void;
-}
 
-export const Option = memo(function Option({ icon, action }:  OptionProps) {
-  return (
-    <button className="min-w-[20px] " onClick={action}>
-      <Image
-        alt={icon}
-        style={{
-          width: 20,
-          height: 20,
-        }}
-        width={20}
-        height={20}
-        src={icon}
-      ></Image>
-    </button>
-  );
-});
+import { Option } from "../../_components/option";
+
 
 const DocumentsLayer = () => {
   const dispatch = useAppDispatch();

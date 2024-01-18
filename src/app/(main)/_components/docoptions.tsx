@@ -4,7 +4,7 @@ import { deleteDocument, favorite } from "@/app/requests";
 import { Document } from "@/app/requests";
 import { useContext, useState } from "react";
 import { memo } from "react";
-import { socket } from "@/app/requests";
+
 import { useToast } from "@/app/hooks/useToast";
 import {
   useAppDispatch,
@@ -111,5 +111,7 @@ const DocOptions = memo(
     );
   }
 );
+
+DocOptions.displayName = "DocOptions"
 
 export default DocOptions;

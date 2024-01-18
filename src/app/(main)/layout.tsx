@@ -4,20 +4,20 @@ import React from "react";
 import Navigation from "./_components/navigation";
 import Search from "../_components/search";
 import { useEffect } from "react";
-import { socket, Document, getDocument, getDocuments } from "../requests";
+import { Document, getDocument, getDocuments } from "../requests";
 import {
   useAppDispatch,
   setDocuments,
   docsState,
 } from "../hooks/store";
 import { useRouter } from "next/navigation";
-import { render } from "react-dom";
+
 import ReactDOM from "react-dom/client";
 import { useToast } from "../hooks/useToast";
 import { createPortal } from "react-dom";
 import { toastState, useAppSelector } from "../hooks/store";
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
-import { socketTaskDelegator } from "../requests";
+
 import { Edits } from "./_components/edits";
 
 import { fetchChatHistory } from "../requests";

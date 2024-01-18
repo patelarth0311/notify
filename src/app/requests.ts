@@ -14,77 +14,7 @@ export interface Document {
     editMessage?: string 
 }
 
-export class SocketTaskDelegator {
 
-    socket : Socket
-
-    constructor(socket: Socket) {
-        this.socket = socket
-    }
-   
-    
-
-    addDocument(makeToast: () => void, document: Document) {
-        const router = useRouter()
-        socket.send(({
-            "action": 'getDocuments', 
-            "message" : "Fetching documents again"
-          }))
-          var documentId =  document.documentId
-          router.push( `/documents/${documentId}`)
-        makeToast()
-    }
-
-
-}
-
-class Socket {
-    socket : WebSocket | null = null
-    
-    init() {
-       this.socket = new WebSocket("wss://j33lh5l3xj.execute-api.us-east-1.amazonaws.com/production");
-    }
-
-   
-    onOpen() {
-        if (this.socket) {
-            this.socket.onopen = () => {
-                if (this.socket) {
-                    this.socket.send(JSON.stringify({
-                        "action": "getDocuments", 
-                        "message" : "Fetching documents"
-                      }))
-                }
-               
-            }
-           
-        }
-    }
-
-    OnMessage(action: (message :  MessageEvent<any>) => void) {
-       
-        if (this.socket) {
-            this.socket.onmessage = (e) => {
-                action(e)
-            }
-        }
-    }
-
-    send(input: {}) {
-        if (this.socket) {
-            this.socket.send(JSON.stringify(input))
-        }
-    }
-
-    isOpen() {
-        return this.socket?.readyState
-    }
-}
-
-const socket = new Socket()
-const socketTaskDelegator = new SocketTaskDelegator(socket)
-
-export {socket, socketTaskDelegator}
 
 
 
