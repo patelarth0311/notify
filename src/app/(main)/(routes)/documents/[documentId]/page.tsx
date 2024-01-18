@@ -36,15 +36,10 @@ import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
 
 
 
-export const getServerSideProps = (async () => {
-  // Fetch data from external API
-  return { 
-    notFound: true
-}; 
-}) satisfies GetServerSideProps<{ nonFound: boolean }>
 
-function Page({ params }: { params: { documentId: string } }) {
+
+function DocumentPage({ params }: { params: { documentId: string } }) {
   return <DocumentView documentId={params.documentId} ></DocumentView>
 }
 
-export default Page;
+export default DocumentPage;

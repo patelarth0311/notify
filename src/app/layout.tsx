@@ -31,6 +31,13 @@ export default function RootLayout({
   );
 
   useEffect(() => {
+
+    fetch('/api/cred')
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error(error));
+
+
     var res = logInWithTokens(
       () => {},
       () => router.push("/")
