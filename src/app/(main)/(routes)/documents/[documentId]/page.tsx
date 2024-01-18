@@ -33,15 +33,7 @@ import { AskAI } from "@/app/(main)/_components/askai";
 import { UserContext } from "@/app/context";
 import { DocumentView } from "@/app/(main)/_components/documentview";
 
-export async function generateStaticParams() {
 
-  
-
-  const posts = await fetch('https://4lqud0fnn0.execute-api.us-east-1.amazonaws.com/Notify/getdocuments?userId=1').then((res) => res.json())
- 
-  return [{documentId: ""}]
-
-}
 function DocumentPage({ params }: { params: { documentId: string } }) {
   return <DocumentView documentId={params.documentId} ></DocumentView>
 }
