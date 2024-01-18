@@ -32,12 +32,16 @@ import {
 import { AskAI } from "@/app/(main)/_components/askai";
 import { UserContext } from "@/app/context";
 import { DocumentView } from "@/app/(main)/_components/documentview";
+import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
 
-export function getServerSideProps() { 
+
+
+export const getServerSideProps = (async () => {
+  // Fetch data from external API
   return { 
     notFound: true
 }; 
-}
+}) satisfies GetServerSideProps<{ nonFound: boolean }>
 
 function DocumentPage({ params }: { params: { documentId: string } }) {
   return <DocumentView documentId={params.documentId} ></DocumentView>
