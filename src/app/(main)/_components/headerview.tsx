@@ -64,8 +64,8 @@ export const HeaderView = ({
   const client = new DynamoDBClient({
     region: "us-east-1",
     credentials: {
-      accessKeyId: "AKIA5YXVFGAJSRG4BHFB",
-      secretAccessKey: "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",
+      accessKeyId: "",
+      secretAccessKey: "",
     },
   });
 

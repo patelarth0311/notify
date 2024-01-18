@@ -122,8 +122,8 @@ const useEditor = (doc: Document, editable: boolean) => {
   const client = new DynamoDBClient({
     region: "us-east-1",
     credentials: {
-      accessKeyId: "AKIA5YXVFGAJ74RIILNB",
-      secretAccessKey: "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",
+      accessKeyId: "",
+      secretAccessKey: "",
     },
   });
 
@@ -181,8 +181,8 @@ const useEditor = (doc: Document, editable: boolean) => {
         const client = new S3Client({
           region: "us-east-1",
           credentials: {
-            accessKeyId: "AKIA5YXVFGAJ74RIILNB",
-            secretAccessKey: "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",
+            accessKeyId: "",
+            secretAccessKey: "",
           },
         });
         const command = new PutObjectCommand({

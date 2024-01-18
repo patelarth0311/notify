@@ -117,7 +117,7 @@ function AIOption({render} : {render: () =>  React.JSX.Element})  {
 function AIToolBarOptions() {
   const handleUpload = async (file : File ) => {
     const s3client = new S3Client({ region: "us-east-1", credentials: {
-        accessKeyId: "AKIA5YXVFGAJ74RIILNB", secretAccessKey:"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"
+        accessKeyId: "", secretAccessKey:""
       } });
     const command = new PutObjectCommand({
         Bucket: 'notifydocumentz',
