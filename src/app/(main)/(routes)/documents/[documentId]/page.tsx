@@ -43,8 +43,8 @@ export const getServerSideProps = (async () => {
 }; 
 }) satisfies GetServerSideProps<{ nonFound: boolean }>
 
-function DocumentPage({ params }: { params: { documentId: string } }) {
+function Page({ params }: { params: { documentId: string } }) {
   return <DocumentView documentId={params.documentId} ></DocumentView>
 }
 
-export default DocumentPage;
+export default Page;
