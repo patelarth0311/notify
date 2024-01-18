@@ -33,7 +33,11 @@ import { AskAI } from "@/app/(main)/_components/askai";
 import { UserContext } from "@/app/context";
 import { DocumentView } from "@/app/(main)/_components/documentview";
 
-
+export function getServerSideProps() { 
+  return { 
+    notFound: true
+}; 
+}
 
 function DocumentPage({ params }: { params: { documentId: string } }) {
   return <DocumentView documentId={params.documentId} ></DocumentView>
