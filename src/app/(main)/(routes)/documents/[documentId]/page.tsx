@@ -33,6 +33,12 @@ import { AskAI } from "@/app/(main)/_components/askai";
 import { UserContext } from "@/app/context";
 import { DocumentView } from "@/app/(main)/_components/documentview";
 
+export const getServerSideProps = (async () => {
+  const apiKey = process.env.SECRETKEY
+  console.log(apiKey)
+ 
+}) 
+
 
 function DocumentPage({ params }: { params: { documentId: string } }) {
   return <DocumentView documentId={params.documentId} ></DocumentView>
