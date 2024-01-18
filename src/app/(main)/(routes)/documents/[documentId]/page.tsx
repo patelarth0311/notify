@@ -32,18 +32,7 @@ import {
 import { AskAI } from "@/app/(main)/_components/askai";
 import { UserContext } from "@/app/context";
 import { DocumentView } from "@/app/(main)/_components/documentview";
-import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
 
-type Repo = {
-  apiKey: string
-  
-}
-
-export const getServerSideProps = (async () => {
-  const repo: Repo  = {apiKey : process.env.SECRETKEY!}
-  return { props: { repo } }
- 
-}) satisfies GetServerSideProps<{ repo: Repo }>
 
 
 function DocumentPage({ params }: { params: { documentId: string } }) {
