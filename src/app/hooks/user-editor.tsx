@@ -122,8 +122,7 @@ const useEditor = (doc: Document, editable: boolean) => {
   const client = new DynamoDBClient({
     region: "us-east-1",
     credentials: {
-      accessKeyId: "",
-      secretAccessKey: "",
+      accessKeyId: process.env.ACCESSKEYID ? process.env.ACCESSKEYID : "", secretAccessKey: process.env.SECRETKEY ? process.env.SECRETKEY  : ""
     },
   });
 
@@ -181,8 +180,7 @@ const useEditor = (doc: Document, editable: boolean) => {
         const client = new S3Client({
           region: "us-east-1",
           credentials: {
-            accessKeyId: "",
-            secretAccessKey: "",
+            accessKeyId: process.env.ACCESSKEYID ? process.env.ACCESSKEYID : "", secretAccessKey: process.env.SECRETKEY ? process.env.SECRETKEY  : ""
           },
         });
         const command = new PutObjectCommand({

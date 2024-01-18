@@ -9,7 +9,7 @@ import { User, UserContext } from "./context";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { logInWithTokens } from "./(main)/_components/userreg";
 import { useRouter } from "next/navigation";
-const inter = Inter({ subsets: ["latin"] });
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export default function RootLayout({
   children,
@@ -51,6 +51,8 @@ export default function RootLayout({
       <UserContext.Provider value={contextValue}>
         <Provider store={store}>
           <body className="h-full w-full">{children}</body>
+          <SpeedInsights />
+
         </Provider>
       </UserContext.Provider>
     </html>

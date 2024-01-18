@@ -28,16 +28,14 @@ const CoverOption = memo(({ documentId, type }: CoverOptionProps) => {
   const client = new DynamoDBClient({
     region: "us-east-1",
     credentials: {
-      accessKeyId: process.env.REACT_APP_KEYID!,
-      secretAccessKey: process.env.REACT_APP_SECRETKEY!,
+      accessKeyId: process.env.ACCESSKEYID ? process.env.ACCESSKEYID : "", secretAccessKey: process.env.SECRETKEY ? process.env.SECRETKEY  : ""
     },
   });
 
   const s3client = new S3Client({
     region: "us-east-1",
     credentials: {
-      accessKeyId: process.env.REACT_APP_KEYID!,
-      secretAccessKey: process.env.REACT_APP_SECRETKEY!,
+      accessKeyId: process.env.ACCESSKEYID ? process.env.ACCESSKEYID : "", secretAccessKey: process.env.SECRETKEY ? process.env.SECRETKEY  : ""
     },
   });
 

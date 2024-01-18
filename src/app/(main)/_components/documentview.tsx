@@ -23,8 +23,7 @@ export const DocumentView = ({ documentId }:  { documentId: string } ) => {
     const client = new DynamoDBClient({
       region: "us-east-1",
       credentials: {
-        accessKeyId: "",
-        secretAccessKey: "",
+        accessKeyId: process.env.ACCESSKEYID ? process.env.ACCESSKEYID : "", secretAccessKey: process.env.SECRETKEY ? process.env.SECRETKEY  : ""
       },
     });
   
