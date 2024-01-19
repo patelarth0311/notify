@@ -43,7 +43,7 @@ export function UserRegView() {
     <Modal zindex={20}>
       <div
         ref={ref}
-        className="w-[500px] h-[500px] bg-white rounded-[20px] shadow-2xl"
+        className="max-w-[500px] w-[calc(100%-15px)] h-[500px] bg-white rounded-[20px] shadow-2xl"
       >
         <div className="flex w-full h-full relative justify-center flex-col p-3  ">
           <h1 className="font-bold text-lg">Notify</h1>
