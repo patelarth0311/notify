@@ -39,20 +39,20 @@ export async function GET( req: NextRequest,
   };
 
   const updating = new UpdateItemCommand(updateParams);
-  var data = undefined
+
 
     result = await client.send(updating).then((res) => {
     try {
       const unmarshalledData = unmarshall(res.Attributes!) as Document;
-      data = unmarshalledData
-      return  Response.json(unmarshalledData)
+     
+      return  unmarshalledData
     } catch (error) {
 
     }
   });
       } 
     } catch (error) {
-      return Response.json(error)
+      return error
     }
   
 
