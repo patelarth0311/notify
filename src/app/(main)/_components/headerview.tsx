@@ -61,50 +61,36 @@ export const HeaderView = ({
     [header, documentId]
   );
 
-  const client = new DynamoDBClient({
-    region: "us-east-1",
-    credentials: {
-      accessKeyId: process.env.ACCESSKEYID ? process.env.ACCESSKEYID : "", secretAccessKey: process.env.SECRETKEY ? process.env.SECRETKEY  : ""
-    },
-  });
+
 
   const context = useContext(UserContext)
 
   const updateDocName = async (name: string, documentId: string) => {
+
+
     if (context) {
-      const updateParams: UpdateItemInput = {
-        TableName: "NotifyNew",
-        Key: {
-          userId: { S: context.user.userId },
-          documentId: { S: documentId },
-        },
-        UpdateExpression: "SET documentName = :value",
-        ExpressionAttributeValues: {
-          ":value": { S: name },
-        },
-        ReturnValues: "ALL_NEW",
-      };
-      const updating = new UpdateItemCommand(updateParams);
-      await client.send(updating).then((res) => {
-        try {
-          const unmarshalledData = unmarshall(res.Attributes!) as Document;
+
+      fetch(`/api/cred?userId=${context.user.userId}&name=${name}&documentId=${documentId}`,{
+        method: "GET",
+    }).then((res) => res.json()).then(res => {
   
-          dispatch(
-            setADocument({
-              updatedDocument: {
-                ...unmarshalledData,
-                editMessage: `Changed title to ${name}`,
-              },
-            })
-          );
-          makeToast({
-            ...unmarshalledData,
+  
+      
+      dispatch(
+        setADocument({
+          updatedDocument: {
+            ...(res as Document),
             editMessage: `Changed title to ${name}`,
-          });
-        } catch (error) {
-          console.log(error);
-        }
+          },
+        })
+      );
+      makeToast({
+        ...(res as Document),
+        editMessage: `Changed title to ${name}`,
       });
+  
+  
+    })
     }
   };
 

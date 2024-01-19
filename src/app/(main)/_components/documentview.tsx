@@ -20,12 +20,7 @@ import { Document } from "@/app/requests";
 
 export const DocumentView = ({ documentId }:  { documentId: string } ) => {
     const [doc, setDoc] = useState<Document>();
-    const client = new DynamoDBClient({
-      region: "us-east-1",
-      credentials: {
-        accessKeyId: process.env.ACCESSKEYID ? process.env.ACCESSKEYID : "", secretAccessKey: process.env.SECRETKEY ? process.env.SECRETKEY  : ""
-      },
-    });
+
   
     const { documents } = useAppSelector(docsState);
     const [loading, setLoading] = useState(true);

@@ -25,6 +25,15 @@ interface CoverOptionProps {
 }
 
 const CoverOption = memo(({ documentId, type }: CoverOptionProps) => {
+ 
+
+  const { makeToast } = useToast();
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  const dispatch = useAppDispatch();
+
+  const context = useContext(UserContext)
+
   const client = new DynamoDBClient({
     region: "us-east-1",
     credentials: {
@@ -38,13 +47,6 @@ const CoverOption = memo(({ documentId, type }: CoverOptionProps) => {
       accessKeyId: process.env.ACCESSKEYID ? process.env.ACCESSKEYID : "", secretAccessKey: process.env.SECRETKEY ? process.env.SECRETKEY  : ""
     },
   });
-
-  const { makeToast } = useToast();
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
-
-  const dispatch = useAppDispatch();
-
-  const context = useContext(UserContext)
   
 
   const handleUpload = async (file: File) => {
