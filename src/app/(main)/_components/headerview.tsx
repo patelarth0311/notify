@@ -69,8 +69,8 @@ export const HeaderView = ({
 
 
     if (context) {
-      console.log(context)
-      fetch(`/api/cred?userId=${context.user.userId}&name=${name}&documentId=${documentId}`,{
+    
+      fetch(`/api/cred/${context.user.userId}/${name}/${documentId}`,{
         method: "GET",
     }).then((res) => res.json()).then(res => {
   
