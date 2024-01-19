@@ -75,7 +75,7 @@ export const HeaderView = ({
     }).then((res) => res.json()).then(res => {
   
   
-      
+      console.log(res);
       if (res && (res as Document).documentId) {
         dispatch(
           setADocument({
