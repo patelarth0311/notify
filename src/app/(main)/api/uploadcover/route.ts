@@ -39,7 +39,8 @@ export async function POST( req: NextRequest,
   const userId = req.nextUrl.searchParams.get("userId")!
   const documentId = req.nextUrl.searchParams.get("documentId")!
   var data = undefined
-  const file = await req.json() as File
+  const file = await req.json()
+
 
   try {
 
@@ -62,7 +63,7 @@ export async function POST( req: NextRequest,
       };
       const command = new PutObjectCommand({
         Bucket: "notifydocuments",
-        Key: file.name,
+        Key: "PAPAPAPPAPAPA",
         Body: file,
       });
       const updating = new UpdateItemCommand(args);
@@ -70,7 +71,7 @@ export async function POST( req: NextRequest,
       try {
         await s3client.send(command);
         const res = await client.send(updating);
-        const unmarshalledData = unmarshall(res.Attributes!) as Document;
+        data  = unmarshall(res.Attributes!) as Document;
       } catch (err) {
         console.error(err);
       }
