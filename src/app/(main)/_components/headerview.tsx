@@ -73,13 +73,24 @@ export const HeaderView = ({
         method: "GET",
     }).then((res) => res.json()).then(res => {
      
-      console.log(res)
-
+      dispatch(
+        setADocument({
+          updatedDocument: {
+            ...(res as Document),
+            editMessage: `Changed title to ${name}`,
+          },
+        })
+      );
+      makeToast({
+        ...(res as Document),
+        editMessage: `Changed title to ${name}`,
+      });
     })
+
+    }
    
     
-  }
-}
+  };
 
   return (
     <>
