@@ -72,26 +72,7 @@ export const HeaderView = ({
     
       fetch(`/api/cred?userId=${context.user.userId}&name=${name}&documentId=${documentId}`,{
         method: "GET",
-    }).then((res) => res.json()).then(res => {
-  
-  
-
-        dispatch(
-          setADocument({
-            updatedDocument: {
-              ...(res as Document),
-              editMessage: `Changed title to ${name}`,
-            },
-          })
-        );
-        makeToast({
-          ...(res as Document),
-          editMessage: `Changed title to ${name}`,
-        });
-    
-      
-  
-    })
+    }).then((res) => console.log(res))
     }
   };
 
