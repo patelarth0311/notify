@@ -49,7 +49,7 @@ function FeatureCard({ text, title, action, icon }: FaceCardProps) {
   return (
     <div
       onClick={() => action()}
-      className="w-[220px] shadow-lg h-[130px] px-[20px] py-[16px] rounded-[10px] bg-[#f1f5f9]"
+      className=" flex-1 max-w-[220px] shadow-lg h-[130px] px-[20px] py-[16px] rounded-[10px] bg-[#f1f5f9]"
     >
       <div className="flex w-full justify-between">
         <h1 className="text-xl text-black font-bold">{title}</h1>
@@ -71,10 +71,10 @@ function FeatureCard({ text, title, action, icon }: FaceCardProps) {
 
 function FeaturePanel({ pic, features }: FeaturePanelProps) {
   return (
-    <div className="flex flex-col gap-y-[20px]">
-      <div className="flex relative shadow-lg w-[650px] h-[429px]  rounded-[10px] overflow-hidden ">
+    <div className="flex flex-1 flex-col gap-y-[20px] items-center justify-center">
+      <div className="flex flex-1 aspect-[3134/2026] max-w-[800px] h-full w-full relative shadow-lg   rounded-[10px] overflow-hidden ">
         <Image
-          sizes="width:100%"
+
           fill
           style={{
             width: "100%",
@@ -87,16 +87,18 @@ function FeaturePanel({ pic, features }: FeaturePanelProps) {
           alt={""}
         ></Image>
       </div>
-      <FeatureGrid features={features}></FeatureGrid>
+
+     <FeatureGrid features={features}></FeatureGrid>
+    
     </div>
   );
 }
 
 function FeatureGrid({ features }: { features: { title: string }[] }) {
   return (
-    <div className="flex  w-[650px] h-[250px] flex-row gap-x-[20px]">
+    <div className="flex h-[200px]  w-full justify-center flex-row gap-x-[20px]  ">
       {features.map((item, index) => (
-        <div key={index} className="rounded-[10px] bg-[#f1f5f9] flex-1 p-3">
+        <div key={index} className="rounded-[10px] max-w-[300px] w-full h-full bg-[#f1f5f9] px-[20px] py-[16px] flex-1 p-3">
           <h1 className="text-xl text-black font-semibold">{item.title}</h1>
         </div>
       ))}
@@ -111,8 +113,8 @@ function FeatureView() {
   const docFeatures = [{ title: "Rich Text-Editor" }, { title: "Customize" }];
 
   return (
-    <div className="flex gap-x-[15px] flex-col items-center gap-y-[15px]">
-      <div className="flex gap-x-[15px] flex-row">
+    <div className="flex gap-x-[15px] w-full justify-between  flex-col  gap-y-[15px] overflow-hidden">
+      <div className="flex gap-x-[15px] w-full  flex-row flex-1 items-center justify-center">
         <FeatureCard
           action={() => setSelection(0)}
           title={"AI"}
@@ -142,10 +144,10 @@ export default function Home() {
 
 
   return (
-    <main className="flex min-h-screen h-full  text-black flex-col  w-full  bg-white">
-      <div className="p-3">
+    <main className="flex relative min-h-screen h-full  text-black flex-col  w-full  bg-white overflow-hidden">
+      <div className="absolute p-3 w-full h-full ">
         <Nav></Nav>
-        <div className="items-center p-24 w-full h-full flex flex-col gap-y-[20px] ">
+        <div className="items-center justify-center flex-1  p-[10px] w-full h-full flex flex-col gap-y-[20px] ">
           <h1 className="text-4xl text-black">Personalized workspace</h1>
 
           <FeatureView></FeatureView>

@@ -48,6 +48,7 @@ const MainLayer = ({ children }: { children: React.ReactNode }) => {
         id="main-layout"
         className="h-screen  flex dark:bg-[#121212] w-screen relative overflow-hidden"
       >
+        <Search></Search>
         <Navigation />
         <Search></Search>
 

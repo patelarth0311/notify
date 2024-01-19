@@ -49,7 +49,7 @@ const SearchContent = () => {
     const [query, setQuery] = useState("")
 
     return <Modal zindex={9000}>
-    <div ref = {ref} className="dark:bg-[#1F1F1F]  max-w-[660px] w-full h-full min-h-[50px] max-h-[80vh] rounded-[12px] m-[5px]">
+    <div ref = {ref} className="dark:bg-[#1F1F1F]  w-[calc(100%-23px)] flex-1 max-w-[660px]  h-full min-h-[50px] max-h-[80vh] rounded-[12px] m-[5px]">
     <div className="flex flex-col min-w-[180x] max-w-[calc(100vw-42px)] h-full p-[_0px_16px_0px_12px] overflow-y-auto">
         <div className="flex w-full items-center h-[50px]">
         <Image style={{width: 19, height: 19}}  className="mr-3" alt={"mg"} width={19} height={19} src={"/search.svg"}></Image>
