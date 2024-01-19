@@ -52,7 +52,7 @@ const CoverOption = memo(({ documentId, type }: CoverOptionProps) => {
   const handleUpload = async (file: File) => {
     if (context) {
       console.log(JSON.stringify(file))
-      fetch(`/api/edit?userId=${context.user.userId}&documentId=${documentId}`,{
+      fetch(`/api/uploadcover?userId=${context.user.userId}&documentId=${documentId}`,{
          
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
