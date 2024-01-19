@@ -76,6 +76,21 @@ export const HeaderView = ({
   
   
 
+        dispatch(
+          setADocument({
+            updatedDocument: {
+              ...(res as Document),
+              editMessage: `Changed title to ${name}`,
+            },
+          })
+        );
+        makeToast({
+          ...(res as Document),
+          editMessage: `Changed title to ${name}`,
+        });
+    
+      
+  
     })
     }
   };
