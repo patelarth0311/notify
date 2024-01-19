@@ -7,6 +7,7 @@ type ResponseData = {
 }
 export const dynamic = "force-dynamic";
 
+export var dynaclient : DynamoDBClient | undefined  = undefined
 
 export async function GET( req: NextRequest,
   res: NextResponse) {
@@ -20,6 +21,14 @@ export async function GET( req: NextRequest,
       accessKeyId: process.env.ACCESSKEYID , secretAccessKey: process.env.SECRETKEY
     },
   });
+
+  dynaclient = new DynamoDBClient({
+    region: "us-east-1",
+    credentials: {
+      accessKeyId: process.env.ACCESSKEYID ? process.env.ACCESSKEYID : "", secretAccessKey: process.env.SECRETKEY ? process.env.SECRETKEY  : ""
+    },
+  });
+
   const userId = req.nextUrl.searchParams.get("userId")
   const documentId = req.nextUrl.searchParams.get("documentId")
   const name = req.nextUrl.searchParams.get("name")

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useContext } from "react";
 
 import Image from "next/image";
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
@@ -50,15 +50,17 @@ import {
   askAIState,
 } from "./store";
 import { useToast } from "./useToast";
+import { UserContext } from "../context";
 
 const useEditor = (doc: Document, editable: boolean) => {
   const dispatch = useAppDispatch();
   const askAI = useAppSelector(askAIState);
-
+  const context = useContext(UserContext)
   var timer: NodeJS.Timeout | undefined = undefined;
 
   const summarizeAI = (editor: BlockNoteEditor) => {
     dispatch(setAskAI({ ask: true }));
+    
 
     // Block that the text cursor is currently in.
     /**
@@ -142,32 +144,36 @@ const useEditor = (doc: Document, editable: boolean) => {
     initialContent: doc.content,
 
     onEditorContentChange: async (editor) => {
+      
       if (timer) {
         clearTimeout(timer as NodeJS.Timeout);
       }
       const delayDebounceFn = setTimeout(async () => {
+
         try {
-          const params: UpdateItemInput = {
-            TableName: "NotifyNew",
-            Key: {
-              userId: { S: "1" },
-              documentId: { S: doc.documentId },
-            },
-            UpdateExpression: "SET content = :value",
-            ExpressionAttributeValues: marshall(
-              {
-                ":value": editor.topLevelBlocks,
+          if (context) {
+            const params: UpdateItemInput = {
+              TableName: "NotifyNew",
+              Key: {
+                userId: { S: context.user.userId },
+                documentId: { S: doc.documentId },
               },
-              options
-            ),
-            ReturnValues: "ALL_NEW",
-          };
-          const updating = new UpdateItemCommand(params);
-          await client.send(updating).then((res) => {
-            const unmarshalledData = unmarshall(res.Attributes!) as Document;
-            dispatch(setADocument({ updatedDocument: unmarshalledData }));
-            makeToast({ ...unmarshalledData, editMessage: "Updated content" });
-          });
+              UpdateExpression: "SET content = :value",
+              ExpressionAttributeValues: marshall(
+                {
+                  ":value": editor.topLevelBlocks,
+                },
+                options
+              ),
+              ReturnValues: "ALL_NEW",
+            };
+            const updating = new UpdateItemCommand(params);
+            await client.send(updating).then((res) => {
+              const unmarshalledData = unmarshall(res.Attributes!) as Document;
+              dispatch(setADocument({ updatedDocument: unmarshalledData }));
+              makeToast({ ...unmarshalledData, editMessage: "Updated content" });
+            });
+          }
         } catch (error) {
           console.log(error);
         }
