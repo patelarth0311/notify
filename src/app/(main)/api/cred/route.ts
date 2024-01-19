@@ -9,5 +9,5 @@ type ResponseData = {
 export async function GET() {
 
  
-  return Response.json(process.env.ACCESSKEY ? process.env.ACCESSKEY : "a")
+  return Response.json(process.env.ACCESSKEYID ? process.env.ACCESSKEYID: "a")
 }
