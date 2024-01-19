@@ -35,78 +35,58 @@ const CoverOption = memo(({ documentId, type }: CoverOptionProps) => {
   const context = useContext(UserContext)
 
 
-  const handleUpload = async (file: File) => {
-   
-    if (context) {
-     console.log(file)
-      const formData = new FormData();
-      formData.append('file', file);
-    
-      await fetch(`/api/uploadcover?userId=${context.user.userId}&documentId=${documentId}`,{
-         
-        method: 'POST',
-        body: file,
-        headers: {
-          'Content-Type': file.type,
-        },
-      
-  }).then((res) => res.json()).then(res => {
-    console.log(res)
-  })
+  const handleUpload = async (e: File) => {
+  
 
-/*      const args: UpdateItemInput = {
-        TableName: "NotifyNew",
-        Key: {
-          userId: { S: context.user.userId },
-          documentId: { S: documentId },
-        },
-        UpdateExpression: "SET documentImageURL = :value",
-        ExpressionAttributeValues: {
-          ":value": {
-            S: `https://${"notifydocuments"}.s3.${"us-east-1"}.amazonaws.com/${
-              file.name
-            }`,
-          },
-        },
-  
-        ReturnValues: "ALL_NEW",
-      };
-      const command = new PutObjectCommand({
-        Bucket: "notifydocuments",
-        Key: file.name,
-        Body: file,
-      });
-      const updating = new UpdateItemCommand(args);
-  
+
       try {
-        await s3client.send(command);
-        const res = await client.send(updating);
-        const unmarshalledData = unmarshall(res.Attributes!) as Document;
-  
-        dispatch(setADocument({ updatedDocument: unmarshalledData }));
-        makeToast({ ...unmarshalledData, editMessage: `Changed cover letter` });
-      } catch (err) {
-        console.error(err);
+        if (context) {
+         
+      
+          const formData = new FormData();
+          formData.append('file', e);
+        
+          await fetch(`/api/uploadcover?userId=${context.user.userId}&documentId=${documentId}`,{
+             
+            method: 'POST',
+            body: formData,
+          
+      }).then((res) => res.json()).then((res) => {
+        dispatch(setADocument({ updatedDocument: res as Document }));
+        makeToast({ ...res as Document , editMessage: `Changed cover letter` });
+      })
+    
+      };
+      } catch(error) {
+        console.log(error)
       }
-    } */
-  };
   }
   return (
+    
     <div className="relative w-auto">
-      <label htmlFor="file">  {type}</label>
-      <input
-        type="file"
-        id="file"
-        onChange={(e) => {
-         
-          if (e.target.files) {
-            handleUpload(e.target.files[0]);
-          }
-        }}
-        style={{ display: "none" }}
-        multiple={false}
-      />
-    </div>
+    <button
+      onClick={(e) => {
+        if (fileInputRef.current) {
+          fileInputRef.current.click();
+        }
+      }}
+    >
+      {type}
+    </button>
+    <input
+      type="file"
+      ref={fileInputRef}
+      onChange={(e) => {
+        if (e.target.files) {
+          handleUpload(e.target.files[0]);
+        }
+      }}
+      style={{ display: "none" }}
+      multiple
+    />
+  </div>
+    
+   
   );
 });
 

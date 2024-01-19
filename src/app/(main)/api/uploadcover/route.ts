@@ -3,7 +3,9 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { NextRequest, NextResponse } from 'next/server';
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
+import { join } from 'path';
 
+import { writeFile } from 'fs/promises';
 
 type ResponseData = {
   message: string
@@ -18,7 +20,7 @@ export async function POST( req: NextRequest,
   res: NextResponse) {
     try {
 
-      
+    
      
       if (process.env.ACCESSKEYID && process.env.SECRETKEY) {
 
@@ -32,7 +34,7 @@ export async function POST( req: NextRequest,
   const s3client = new S3Client({
     region: "us-east-1",
     credentials: {
-        accessKeyId: process.env.ACCESSKEYID , secretAccessKey: process.env.SECRETKEY
+      accessKeyId: process.env.ACCESSKEYID , secretAccessKey: process.env.SECRETKEY
     },
   });
 
@@ -45,9 +47,17 @@ export async function POST( req: NextRequest,
   
   const userId = req.nextUrl.searchParams.get("userId")!
   const documentId = req.nextUrl.searchParams.get("documentId")!
-  var data = undefined
-  const formData = await req.blob()
-  const file = formData as File
+  var data : Document | undefined = undefined
+  const formData = await req.formData()
+  const file = formData.get('file') as unknown as File
+
+  if (!file) {
+    return NextResponse.json({success: false})
+  }
+
+  const bytes = await file.arrayBuffer()
+  const buffer = Buffer.from(bytes)
+
 
   try {
 
@@ -71,14 +81,18 @@ export async function POST( req: NextRequest,
       const command = new PutObjectCommand({
         Bucket: "notifydocuments",
         Key: file.name,
-        Body: file,
+        Body: buffer,
       });
       const updating = new UpdateItemCommand(args);
-  
+      
       try {
         await s3client.send(command);
-        const res = await client.send(updating);
-        data  = unmarshall(res.Attributes!) as Document;
+        await client.send(updating).then((res) => {
+          const unmarshalledData = unmarshall(res.Attributes!) as Document;
+          data = unmarshalledData
+         
+          console.log(data)
+        });
       } catch (err) {
         console.error(err);
       }

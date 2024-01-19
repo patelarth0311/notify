@@ -116,23 +116,16 @@ function AIOption({render} : {render: () =>  React.JSX.Element})  {
 
 function AIToolBarOptions() {
   const handleUpload = async (file : File ) => {
-    const s3client = new S3Client({ region: "us-east-1", credentials: {
-        accessKeyId: process.env.ACCESSKEYID ? process.env.ACCESSKEYID : "", secretAccessKey: process.env.SECRETKEY ? process.env.SECRETKEY  : ""
-      } });
-    const command = new PutObjectCommand({
-        Bucket: 'notifydocumentz',
-        Key: "1/" + file.name,
-        Body: file,
-      });
-
-      try {
-        let response = await s3client.send(command);
+  
+    const formData = new FormData();
+    formData.append('file', file);
+  
+    await fetch(`/api/aicontext`,{
        
-      
-              
-      } catch (err) {
-        console.error(err);
-      }
+      method: 'POST',
+      body: formData,
+    
+})
 }
   return <div className="">
 

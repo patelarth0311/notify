@@ -121,19 +121,7 @@ const useEditor = (doc: Document, editable: boolean) => {
 
   const { makeToast } = useToast();
 
-  const client = new DynamoDBClient({
-    region: "us-east-1",
-    credentials: {
-      accessKeyId: process.env.ACCESSKEYID ? process.env.ACCESSKEYID : "", secretAccessKey: process.env.SECRETKEY ? process.env.SECRETKEY  : ""
-    },
-  });
 
-  const options = {
-    removeUndefinedValues: true,
-    convertEmptyValues: true,
-  };
-
-  marshall({}, options);
   const editor: BlockNoteEditor = useBlockNote({
     editable: editable,
     domAttributes: {
@@ -167,68 +155,26 @@ const useEditor = (doc: Document, editable: boolean) => {
         })
     
         }
-          /**
-           *         try {
-          if (context) {
-            const params: UpdateItemInput = {
-              TableName: "NotifyNew",
-              Key: {
-                userId: { S: context.user.userId },
-                documentId: { S: doc.documentId },
-              },
-              UpdateExpression: "SET content = :value",
-              ExpressionAttributeValues: marshall(
-                {
-                  ":value": editor.topLevelBlocks,
-                },
-                options
-              ),
-              ReturnValues: "ALL_NEW",
-            };
-            const updating = new UpdateItemCommand(params);
-            await client.send(updating).then((res) => {
-              const unmarshalledData = unmarshall(res.Attributes!) as Document;
-              dispatch(setADocument({ updatedDocument: unmarshalledData }));
-              makeToast({ ...unmarshalledData, editMessage: "Updated content" });
-            });
-          }
-        } catch (error) {
-          console.log(error);
-        }
-           */
       }, 1000);
 
       timer = delayDebounceFn;
     },
     uploadFile: (file: File) =>
-      new Promise(async (resolve, reject) => {
-        const client = new S3Client({
-          region: "us-east-1",
-          credentials: {
-            accessKeyId: process.env.ACCESSKEYID ? process.env.ACCESSKEYID : "", secretAccessKey: process.env.SECRETKEY ? process.env.SECRETKEY  : ""
-          },
-        });
-        const command = new PutObjectCommand({
-          Bucket: "notifydocuments",
-          Key: file.name,
-          Body: file,
-        });
-
-        try {
-          const response = await client.send(command);
-        } catch (err) {
-          console.error(err);
-        }
-        resolve(
-          `https://${"notifydocuments"}.s3.${"us-east-1"}.amazonaws.com/${
-            file.name
-          }`
-        );
-      }),
+      upload<string>(file),
     slashMenuItems: customSlashMenuItemList,
   });
 
   return editor;
 };
+
+function upload<T>(file: File) : Promise<T>  {
+  const formData = new FormData();
+  formData.append('file', file);
+  return fetch(`/api/uploadfromeditor`,{
+    method: 'PUT',
+    body: formData,
+   }).then((res) => res.json())
+
+}
 
 export default useEditor;
