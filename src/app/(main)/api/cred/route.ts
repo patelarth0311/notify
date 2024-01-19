@@ -38,11 +38,12 @@ export async function GET( req: NextRequest,
     ReturnValues: "ALL_NEW",
   };
   const updating = new UpdateItemCommand(updateParams);
-
+  var data = undefined
 
   await client.send(updating).then((res) => {
     try {
       const unmarshalledData = unmarshall(res.Attributes!) as Document;
+      data = unmarshalledData
       return  Response.json(unmarshalledData)
     } catch (error) {
       
@@ -55,7 +56,7 @@ export async function GET( req: NextRequest,
     }
   
 
-    return Response.json("a")
+    return Response.json(data ? data : "aaa")
 }
 
 
