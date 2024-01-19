@@ -274,7 +274,7 @@ function logIn(username: string, password: string, action: (userName: string) =>
       (AWS.config.credentials as AWS.CognitoIdentityCredentials).refresh(
         (error) => {
           if (error) {
-            console.log(error);
+          
           } else {
             
             localStorage.setItem("IdToken", result.getIdToken().getJwtToken());
@@ -349,7 +349,7 @@ function PinView({ username, action }: { username: string, action: () => void })
           <input
             value={confirmation}
             onChange={(e) => {
-              console.log(e.target.value);
+          
               setConfirmation(e.target.value);
             }}
             className="w-[250px] border h-[50px] rounded-[10px] pl-[19px]"

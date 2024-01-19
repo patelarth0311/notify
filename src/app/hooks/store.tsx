@@ -13,7 +13,7 @@ export const askAISlicer = createSlice({
   initialState: false,
   reducers: {
     setAskAI: (state, action) => {
-      console.log(action.payload);
+      
       return action.payload.ask as boolean;
     },
   },
