@@ -144,22 +144,26 @@ const useEditor = (doc: Document, editable: boolean) => {
     initialContent: doc.content,
 
     onEditorContentChange: async (editor) => {
-      
+      var controller = new AbortController()
       if (timer) {
+        controller.abort()
         clearTimeout(timer as NodeJS.Timeout);
       }
       const delayDebounceFn = setTimeout(async () => {
         if (context) {
-          console.log(JSON.stringify(editor.topLevelBlocks))
+         
           fetch(`/api/edit?userId=${context.user.userId}&documentId=${doc.documentId}`,{
          
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(editor.topLevelBlocks),
+              signal: controller.signal
             
         }).then((res) => res.json()).then(res => {
          
-          console.log(res)
+
+          dispatch(setADocument({ updatedDocument: res as Document }));
+          makeToast({ ...res as Document , editMessage: "Updated content" });
         })
     
         }

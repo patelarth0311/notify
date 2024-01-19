@@ -51,7 +51,18 @@ const CoverOption = memo(({ documentId, type }: CoverOptionProps) => {
 
   const handleUpload = async (file: File) => {
     if (context) {
-      const args: UpdateItemInput = {
+      console.log(JSON.stringify(file))
+      fetch(`/api/edit?userId=${context.user.userId}&documentId=${documentId}`,{
+         
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(file),
+      
+  }).then((res) => res.json()).then(res => {
+    console.log(res)
+  })
+
+/*      const args: UpdateItemInput = {
         TableName: "NotifyNew",
         Key: {
           userId: { S: context.user.userId },
@@ -85,9 +96,9 @@ const CoverOption = memo(({ documentId, type }: CoverOptionProps) => {
       } catch (err) {
         console.error(err);
       }
-    }
+    } */
   };
-
+  }
   return (
     <div className="relative w-auto">
       <button
