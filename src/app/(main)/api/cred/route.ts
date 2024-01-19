@@ -23,9 +23,7 @@ export async function GET( req: NextRequest,
   const userId = req.nextUrl.searchParams.get("userId")
   const documentId = req.nextUrl.searchParams.get("documentId")
   const name = req.nextUrl.searchParams.get("name")
-  console.log(userId)
-  console.log(documentId)
-  console.log(name)
+  
 
   const updateParams: UpdateItemInput = {
     TableName: "NotifyNew",
@@ -44,7 +42,7 @@ export async function GET( req: NextRequest,
   await client.send(updating).then((res) => {
     try {
       const unmarshalledData = unmarshall(res.Attributes!) as Document;
-      return Response.json(unmarshalledData)
+      return unmarshalledData
     } catch (error) {
       console.log(error);
     }
