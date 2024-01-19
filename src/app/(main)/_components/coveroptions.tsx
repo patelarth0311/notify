@@ -38,7 +38,7 @@ const CoverOption = memo(({ documentId, type }: CoverOptionProps) => {
   const handleUpload = async (file: File) => {
    
     if (context) {
-     
+     console.log(file)
       const formData = new FormData();
       formData.append('file', file);
     
@@ -90,18 +90,10 @@ const CoverOption = memo(({ documentId, type }: CoverOptionProps) => {
   }
   return (
     <div className="relative w-auto">
-      <button
-        onClick={(e) => {
-          if (fileInputRef.current) {
-            fileInputRef.current.click();
-          }
-        }}
-      >
-        {type}
-      </button>
+      <label htmlFor="file">  {type}</label>
       <input
         type="file"
-        ref={fileInputRef}
+        id="file"
         onChange={(e) => {
          
           if (e.target.files) {
