@@ -23,7 +23,7 @@ export async function GET( req: NextRequest,
   const userId = req.nextUrl.searchParams.get("userId")
   const documentId = req.nextUrl.searchParams.get("documentId")
   const name = req.nextUrl.searchParams.get("name")
-  
+  var result = undefined
 
   const updateParams: UpdateItemInput = {
     TableName: "NotifyNew",
@@ -37,17 +37,17 @@ export async function GET( req: NextRequest,
     },
     ReturnValues: "ALL_NEW",
   };
+
   const updating = new UpdateItemCommand(updateParams);
   var data = undefined
 
-  await client.send(updating).then((res) => {
+    result = await client.send(updating).then((res) => {
     try {
       const unmarshalledData = unmarshall(res.Attributes!) as Document;
       data = unmarshalledData
       return  Response.json(unmarshalledData)
     } catch (error) {
-      
-    
+
     }
   });
       } 
@@ -56,7 +56,7 @@ export async function GET( req: NextRequest,
     }
   
 
-    return Response.json(data ? data : "aaa")
+    return Response.json(result ? result : {})
 }
 
 
