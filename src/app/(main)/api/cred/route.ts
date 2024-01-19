@@ -5,7 +5,7 @@ import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 type ResponseData = {
   message: string
 }
- 
+export const dynamic = "force-dynamic";
 
 
 export async function GET( req: NextRequest,
