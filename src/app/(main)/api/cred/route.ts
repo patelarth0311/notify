@@ -45,14 +45,14 @@ export async function GET( req: NextRequest,
     try {
       const unmarshalledData = unmarshall(res.Attributes!) as Document;
      
-      return  unmarshalledData
+      return  Response.json(unmarshalledData)
     } catch (error) {
 
     }
   });
       } 
     } catch (error) {
-      return error
+      return Response.json(error)
     }
   
 
