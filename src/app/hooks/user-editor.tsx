@@ -149,8 +149,22 @@ const useEditor = (doc: Document, editable: boolean) => {
         clearTimeout(timer as NodeJS.Timeout);
       }
       const delayDebounceFn = setTimeout(async () => {
-
-        try {
+        if (context) {
+          console.log(JSON.stringify(editor.topLevelBlocks))
+          fetch(`/api/edit?userId=${context.user.userId}&documentId=${doc.documentId}`,{
+         
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(editor.topLevelBlocks),
+            
+        }).then((res) => res.json()).then(res => {
+         
+          console.log(res)
+        })
+    
+        }
+          /**
+           *         try {
           if (context) {
             const params: UpdateItemInput = {
               TableName: "NotifyNew",
@@ -177,6 +191,7 @@ const useEditor = (doc: Document, editable: boolean) => {
         } catch (error) {
           console.log(error);
         }
+           */
       }, 1000);
 
       timer = delayDebounceFn;

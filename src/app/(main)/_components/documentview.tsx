@@ -17,11 +17,10 @@ import { HeaderView } from "./headerview";
 import Skeleton from "./skeleton";
 import Editor from "./editor";
 import { Document } from "@/app/requests";
-import { dynaclient } from "@/app/(main)/api/cred/route";
+
 
 export const DocumentView = ({ documentId }:  { documentId: string } ) => {
     const [doc, setDoc] = useState<Document>();
-    console.log(dynaclient ? dynaclient : "aaa")
   
     const { documents } = useAppSelector(docsState);
     const [loading, setLoading] = useState(true);
