@@ -44,8 +44,8 @@ export async function GET( req: NextRequest,
       const unmarshalledData = unmarshall(res.Attributes!) as Document;
       return  Response.json(unmarshalledData)
     } catch (error) {
-      console.log(error);
-      alert(error)
+      
+    
     }
   });
       } 

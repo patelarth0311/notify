@@ -75,23 +75,7 @@ export const HeaderView = ({
     }).then((res) => res.json()).then(res => {
   
   
-      console.log(res);
-      if (res && (res as Document).documentId) {
-        dispatch(
-          setADocument({
-            updatedDocument: {
-              ...(res as Document),
-              editMessage: `Changed title to ${name}`,
-            },
-          })
-        );
-        makeToast({
-          ...(res as Document),
-          editMessage: `Changed title to ${name}`,
-        });
-    
-      }
-  
+
     })
     }
   };
