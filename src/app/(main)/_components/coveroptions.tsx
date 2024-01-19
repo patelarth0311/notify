@@ -36,7 +36,7 @@ const CoverOption = memo(({ documentId, type }: CoverOptionProps) => {
 
 
   const handleUpload = async (file: File) => {
-    console.log(file)
+   
     if (context) {
      
       const formData = new FormData();
@@ -45,7 +45,7 @@ const CoverOption = memo(({ documentId, type }: CoverOptionProps) => {
       await fetch(`/api/uploadcover?userId=${context.user.userId}&documentId=${documentId}`,{
          
         method: 'POST',
-        body: formData,
+        body: file,
       
   }).then((res) => res.json()).then(res => {
     console.log(res)
@@ -103,13 +103,13 @@ const CoverOption = memo(({ documentId, type }: CoverOptionProps) => {
         type="file"
         ref={fileInputRef}
         onChange={(e) => {
-          console.log(e)
+         
           if (e.target.files) {
             handleUpload(e.target.files[0]);
           }
         }}
         style={{ display: "none" }}
-        multiple
+        multiple={false}
       />
     </div>
   );

@@ -46,8 +46,8 @@ export async function POST( req: NextRequest,
   const userId = req.nextUrl.searchParams.get("userId")!
   const documentId = req.nextUrl.searchParams.get("documentId")!
   var data = undefined
-  const formData = await req.formData()
-  const file = formData.get('file') as File
+  const formData = await req.blob()
+  const file = formData as File
 
   try {
 
