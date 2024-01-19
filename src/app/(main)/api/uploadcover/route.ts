@@ -39,8 +39,8 @@ export async function POST( req: NextRequest,
   const userId = req.nextUrl.searchParams.get("userId")!
   const documentId = req.nextUrl.searchParams.get("documentId")!
   var data = undefined
-  const file = await req.json()
-
+  const formData = await req.formData()
+  const file = formData.get('file') as File
 
   try {
 
@@ -63,7 +63,7 @@ export async function POST( req: NextRequest,
       };
       const command = new PutObjectCommand({
         Bucket: "notifydocuments",
-        Key: "PAPAPAPPAPAPA",
+        Key: file.name,
         Body: file,
       });
       const updating = new UpdateItemCommand(args);
