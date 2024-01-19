@@ -34,23 +34,11 @@ const CoverOption = memo(({ documentId, type }: CoverOptionProps) => {
 
   const context = useContext(UserContext)
 
-  const client = new DynamoDBClient({
-    region: "us-east-1",
-    credentials: {
-      accessKeyId: process.env.ACCESSKEYID ? process.env.ACCESSKEYID : "", secretAccessKey: process.env.SECRETKEY ? process.env.SECRETKEY  : ""
-    },
-  });
-
-  const s3client = new S3Client({
-    region: "us-east-1",
-    credentials: {
-      accessKeyId: process.env.ACCESSKEYID ? process.env.ACCESSKEYID : "", secretAccessKey: process.env.SECRETKEY ? process.env.SECRETKEY  : ""
-    },
-  });
-  
 
   const handleUpload = async (file: File) => {
+    console.log(file)
     if (context) {
+     
       const formData = new FormData();
       formData.append('file', file);
     
