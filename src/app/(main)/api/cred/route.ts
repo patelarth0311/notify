@@ -53,6 +53,8 @@ export async function GET( req: NextRequest,
       return Response.json(error)
     }
   
+
+    return Response.json("a")
 }
 
 
