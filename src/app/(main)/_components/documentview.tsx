@@ -1,7 +1,5 @@
 
 "use client"
-
-import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { useContext, useEffect, useState } from "react";
 import {
     useAppSelector,

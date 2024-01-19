@@ -1,12 +1,4 @@
-import {
-  DynamoDB,
-  DynamoDBClient,
-  UpdateItemCommand,
-  UpdateItemInput,
-  UpdateTableInput,
-  QueryCommand,
-  QueryCommandInput,
-} from "@aws-sdk/client-dynamodb";
+
 import { useContext, useEffect, useState } from "react";
 import { Document, getDocument } from "@/app/requests";
 import Cover from "./cover";

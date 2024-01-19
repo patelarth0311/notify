@@ -134,7 +134,7 @@ const useEditor = (doc: Document, editable: boolean) => {
     onEditorContentChange: async (editor) => {
       var controller = new AbortController()
       if (timer) {
-        controller.abort()
+      
         clearTimeout(timer as NodeJS.Timeout);
       }
       const delayDebounceFn = setTimeout(async () => {
@@ -145,7 +145,7 @@ const useEditor = (doc: Document, editable: boolean) => {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(editor.topLevelBlocks),
-              signal: controller.signal
+
             
         }).then((res) => res.json()).then(res => {
          

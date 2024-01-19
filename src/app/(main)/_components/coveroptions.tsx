@@ -1,14 +1,4 @@
-import {
-  DynamoDB,
-  DynamoDBClient,
-  UpdateItemCommand,
-  UpdateItemInput,
-  UpdateTableInput,
-  QueryCommand,
-  QueryCommandInput,
-} from "@aws-sdk/client-dynamodb";
-import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
-import { useSearchParams } from "next/navigation";
+
 import { useContext, useEffect, useState } from "react";
 import { memo } from "react";
 import { useRef } from "react";

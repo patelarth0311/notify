@@ -2,17 +2,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import Image from "next/image";
 import { getSummary } from "@/app/requests";
-import { useCallback } from "react";
-import {
-  DynamoDB,
-  DynamoDBClient,
-  UpdateItemCommand,
-  UpdateItemInput,
-  UpdateTableInput,
-  QueryCommand,
-  QueryCommandInput,
-} from "@aws-sdk/client-dynamodb";
-import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { useCallback } from "react"
 import {
   useAppDispatch,
   useAppSelector,
