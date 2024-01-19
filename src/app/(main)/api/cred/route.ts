@@ -42,9 +42,10 @@ export async function GET( req: NextRequest,
   await client.send(updating).then((res) => {
     try {
       const unmarshalledData = unmarshall(res.Attributes!) as Document;
-      return unmarshalledData
+      return  Response.json(unmarshalledData)
     } catch (error) {
       console.log(error);
+      alert(error)
     }
   });
       } 
