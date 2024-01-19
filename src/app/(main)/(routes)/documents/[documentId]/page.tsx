@@ -33,13 +33,13 @@ import { AskAI } from "@/app/(main)/_components/askai";
 import { UserContext } from "@/app/context";
 import { DocumentView } from "@/app/(main)/_components/documentview";
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
-import { dynaclient } from "@/app/(main)/api/cred/route";
+
 
 
 
 
 function DocumentPage({ params }: { params: { documentId: string } }) {
-  console.log(dynaclient)
+
   return <DocumentView documentId={params.documentId} ></DocumentView>
 }
 
