@@ -20,9 +20,9 @@ export async function GET( req: NextRequest,
       accessKeyId: process.env.ACCESSKEYID , secretAccessKey: process.env.SECRETKEY
     },
   });
-  const userId = req.nextUrl.searchParams.get("userId")
-  const documentId = req.nextUrl.searchParams.get("documentId")
-  const name = req.nextUrl.searchParams.get("name")
+  const userId = "patelarth0311"
+  const documentId = "1705514053970"
+  const name = "ass33see3"
   
 
   const updateParams: UpdateItemInput = {
