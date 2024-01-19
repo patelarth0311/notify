@@ -32,10 +32,6 @@ export default function RootLayout({
 
   useEffect(() => {
 
-    
-    fetch(`/api/cred`,{
-      method: "GET",
-  }).then((res) => res.json()).then(res => console.log(res))
 
 
     var res = logInWithTokens(

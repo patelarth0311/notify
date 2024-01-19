@@ -11,6 +11,7 @@ type ResponseData = {
 export async function GET( req: NextRequest,
   res: NextResponse) {
     try {
+      console.log(req)
       if (process.env.ACCESSKEYID && process.env.SECRETKEY) {
 
   const client = new DynamoDBClient({
