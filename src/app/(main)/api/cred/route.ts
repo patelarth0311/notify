@@ -20,9 +20,9 @@ export async function GET( req: NextRequest,
       accessKeyId: process.env.ACCESSKEYID , secretAccessKey: process.env.SECRETKEY
     },
   });
-  const userId = "patelarth0311"
-  const documentId = "1705514053970"
-  const name = "ass33see3"
+  const userId = req.nextUrl.searchParams.get("userId")
+  const documentId = req.nextUrl.searchParams.get("documentId")
+  const name = req.nextUrl.searchParams.get("name")
   
 
   const updateParams: UpdateItemInput = {
@@ -38,6 +38,7 @@ export async function GET( req: NextRequest,
     ReturnValues: "ALL_NEW",
   };
   const updating = new UpdateItemCommand(updateParams);
+
 
   await client.send(updating).then((res) => {
     try {
