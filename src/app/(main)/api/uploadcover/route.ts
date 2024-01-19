@@ -3,15 +3,22 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { NextRequest, NextResponse } from 'next/server';
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
+
+
 type ResponseData = {
   message: string
 }
 export const dynamic = "force-dynamic";
 
 
+  
+
+
 export async function POST( req: NextRequest,
   res: NextResponse) {
     try {
+
+      
      
       if (process.env.ACCESSKEYID && process.env.SECRETKEY) {
 

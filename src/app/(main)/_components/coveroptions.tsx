@@ -12,7 +12,7 @@ import { useSearchParams } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import { memo } from "react";
 import { useRef } from "react";
-import { LegacyRef } from "react";
+
 
 import { Document } from "@/app/requests";
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
@@ -42,10 +42,9 @@ const CoverOption = memo(({ documentId, type }: CoverOptionProps) => {
       const formData = new FormData();
       formData.append('file', file);
     
-      fetch(`/api/uploadcover?userId=${context.user.userId}&documentId=${documentId}`,{
+      await fetch(`/api/uploadcover?userId=${context.user.userId}&documentId=${documentId}`,{
          
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: formData,
       
   }).then((res) => res.json()).then(res => {
@@ -104,6 +103,7 @@ const CoverOption = memo(({ documentId, type }: CoverOptionProps) => {
         type="file"
         ref={fileInputRef}
         onChange={(e) => {
+          console.log(e)
           if (e.target.files) {
             handleUpload(e.target.files[0]);
           }
