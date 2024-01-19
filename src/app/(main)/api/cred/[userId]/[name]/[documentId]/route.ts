@@ -11,7 +11,7 @@ type ResponseData = {
 export async function GET( req: NextRequest,
   res: NextResponse) {
     try {
-      console.log(req)
+     
       if (process.env.ACCESSKEYID && process.env.SECRETKEY) {
 
   const client = new DynamoDBClient({
@@ -23,6 +23,9 @@ export async function GET( req: NextRequest,
   const userId = req.nextUrl.searchParams.get("userId")
   const documentId = req.nextUrl.searchParams.get("documentId")
   const name = req.nextUrl.searchParams.get("name")
+  console.log(userId)
+  console.log(documentId)
+  console.log(name)
 
   const updateParams: UpdateItemInput = {
     TableName: "NotifyNew",
