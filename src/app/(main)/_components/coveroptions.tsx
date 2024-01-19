@@ -46,6 +46,9 @@ const CoverOption = memo(({ documentId, type }: CoverOptionProps) => {
          
         method: 'POST',
         body: file,
+        headers: {
+          'Content-Type': file.type,
+        },
       
   }).then((res) => res.json()).then(res => {
     console.log(res)
