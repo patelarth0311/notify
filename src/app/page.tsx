@@ -144,11 +144,11 @@ export default function Home() {
 
 
   return (
-    <main className="flex relative min-h-screen h-full  text-black flex-col  w-full  bg-white overflow-hidden">
-      <div className="absolute p-3 w-full h-full ">
+    <main className="flex relative min-h-screen h-full  text-black flex-col  w-full  bg-white ">
+      <div className=" p-3 w-full h-full   ">
         <Nav></Nav>
         <div className="items-center justify-center flex-1  p-[10px] w-full h-full flex flex-col gap-y-[20px] ">
-          <h1 className="text-4xl text-black">Personalized workspace</h1>
+          <h1 className="text-2xl text-black font-medium ">Personalized workspace</h1>
 
           <FeatureView></FeatureView>
         </div>

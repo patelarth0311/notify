@@ -32,21 +32,10 @@ export default function RootLayout({
 
   useEffect(() => {
 
-
-
-    var res = logInWithTokens(
-      () => {},
-      () => router.push("/")
-    );
-
-    if (!res) {
-      router.push("/");
-    } else {
-     
-      setUser((prev) => {
-        return { ...prev, userId: res };
-      });
-    }
+    setUser((prev) => {
+      return { ...prev, userId: "patelarth0311" };
+    });
+    
   }, []);
 
   return (
