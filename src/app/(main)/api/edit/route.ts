@@ -64,19 +64,7 @@ export async function POST( req: NextRequest,
         data = unmarshalledData
       });
 
-      const filePath = `/tmp/${curBlockId}.txt`;
-      await fs.promises.writeFile(filePath, content);
-
-      const command = new PutObjectCommand({
-        Bucket: "notifydocumentz",
-        Key: `1/${curBlockId}.txt`,
-        Body:await fs.promises.readFile(filePath)
-      });
-
-      
-      
   
-      await s3client.send(command);
     
   } catch (error) {
     console.log(error);
