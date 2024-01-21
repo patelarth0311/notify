@@ -134,7 +134,7 @@ const CustomFormattingToolbar = (props: { editor: BlockNoteEditor }) => {
               props.editor.getTextCursorPosition().block;
             const nextBlock = props.editor.getTextCursorPosition().nextBlock;
             const currentPosition = currentBlock.id;
-
+              
             const now = new Date();
             const id =
               now.getDay().toString() +

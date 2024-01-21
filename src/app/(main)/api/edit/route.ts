@@ -6,7 +6,8 @@ type ResponseData = {
   message: string
 }
 export const dynamic = "force-dynamic";
-
+import fs from 'fs';
+import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 
 export async function POST( req: NextRequest,
   res: NextResponse) {
@@ -21,6 +22,13 @@ export async function POST( req: NextRequest,
     },
   });
 
+  const s3client = new S3Client({
+    region: "us-east-1",
+    credentials: {
+        accessKeyId: process.env.ACCESSKEYID , secretAccessKey: process.env.SECRETKEY
+    },
+  });
+
   const options = {
     removeUndefinedValues: true,
     convertEmptyValues: true,
@@ -31,7 +39,7 @@ export async function POST( req: NextRequest,
   const userId = req.nextUrl.searchParams.get("userId")!
   const documentId = req.nextUrl.searchParams.get("documentId")!
   var data = undefined
-  const content = await req.json()
+  const {content, curBlockId, text} = await req.json()
 
   try {
 
@@ -55,6 +63,20 @@ export async function POST( req: NextRequest,
         const unmarshalledData = unmarshall(res.Attributes!) as Document;
         data = unmarshalledData
       });
+
+      const filePath = `/tmp/${curBlockId}.txt`;
+      await fs.promises.writeFile(filePath, content);
+
+      const command = new PutObjectCommand({
+        Bucket: "notifydocumentz",
+        Key: `1/${curBlockId}.txt`,
+        Body:await fs.promises.readFile(filePath)
+      });
+
+      
+      
+  
+      await s3client.send(command);
     
   } catch (error) {
     console.log(error);

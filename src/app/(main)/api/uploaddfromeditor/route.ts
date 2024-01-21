@@ -50,7 +50,7 @@ export async function PUT( req: NextRequest,
 
 
       const command = new PutObjectCommand({
-        Bucket: "notifydocuments",
+        Bucket: "notifydocument",
         Key: file.name,
         Body: buffer,
       });
