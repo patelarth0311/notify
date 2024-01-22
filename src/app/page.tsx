@@ -73,19 +73,18 @@ function FeatureCard({ text, title, action, icon, selected }: FaceCardProps & {s
 
 
 function CapabilityCard({ feature}: {feature: { title: string, pics: string[] }}) {
-  return         <div className=" flex justify-center items-center flex-wrap gap-x-[10px] gap-y-[10px] overflow-hidden relative  w-full max-w-[900px] text-[28px] font-[600] rounded-[10px] p-[30px]">
+  return         <div className=" flex justify-center flex-1  h-full   items-center flex-wrap gap-x-[10px] gap-y-[10px] overflow-hidden relative  w-full max-w-[900px] text-[28px] font-[600] rounded-[10px] p-[30px]">
 
 
           {feature.pics.map((pic, index) => (
-              <div key={index} className="relative aspect-square w-full h-full  flex-1 overflow-hidden">
+              <div key={index} className="relative w-full h-[500px] aspect-auto  flex-1 overflow-hidden">
                <Image
-          sizes="width:100%"
-  
+
+
           fill
           style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
+         
+            objectFit: "contain",
 
           }}
           onLoadingComplete={() => {}}
@@ -117,7 +116,7 @@ function FeaturePanel({ features, title }: FeaturePanelProps) {
 
     <div className="flex   gap-y-[10px] gap-x-[15px] flex-col">
       
-        <div className="flex flex-col justify-center items-center gap-y-[30px]">
+        <div className="flex flex-1  flex-col justify-center w-full items-center gap-y-[30px]">
        <div className="flex  w-full max-w-[900px] ">
        <h1 className="text-5xl text-black font-bold text-left">{title}</h1>
        </div>
@@ -151,7 +150,7 @@ function FeaturePanel({ features, title }: FeaturePanelProps) {
 function FeatureView() {
   const [selection, setSelection] = useState(0);
 
-  const aiFeatures = [{ title: "Summarize", pics: [], details: "Have your notes to be summarized by AI" }, { title: "Ask", pics: [] , details: "Engage in Q&A with AI about your notes"  }];
+  const aiFeatures = [{ title: "Summarize", pics: ["/qa.png"], details: "Have your notes to be summarized by AI - even documents" }, { title: "Ask", pics: ["/sum.png"] , details: "Engage in Q&A with AI about your notes"  }];
   const docFeatures = [{ title: "Rich Text-Editor",  pics: ["/richtext.png"], details: "Easily create the content of your notes. Powered by BlockNote.js"    }, { title: "Customize", pics:["/card1.png" , "/card2.png"] , details: "Manage your notes beyond just writing" }];
 
   return (
