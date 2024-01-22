@@ -78,7 +78,7 @@ export function AskAI({ editor }: { editor: BlockNoteEditor }) {
   const { ref } = useModal(() => dispatch(setAskAI({ ask: false })));
 
   return (
-    <div ref={ref} className=" absolute max-w-[400px]  w-full left-[54px] flex flex-col gap-y-[10px] z-[20]">
+    <div ref={ref} className=" absolute max-w-[550px]  w-[calc(100vw-100px)] left-[54px] flex flex-col gap-y-[10px] z-[20]">
       <AIToolBarOptions></AIToolBarOptions>
       <AIInput editor={editor}></AIInput>
     </div>
