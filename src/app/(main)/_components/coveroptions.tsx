@@ -64,6 +64,7 @@ const CoverOption = memo(({ documentId, type }: CoverOptionProps) => {
       {type}
     </button>
     <input
+      accept="image/*"
       type="file"
       ref={fileInputRef}
       onChange={(e) => {

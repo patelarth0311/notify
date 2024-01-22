@@ -65,3 +65,4 @@ const Cover = memo(
 );
 Cover.displayName = "Cover"
 export default Cover;
+

@@ -131,7 +131,8 @@ const useEditor = (doc: Document, editable: boolean) => {
     },
     initialContent: doc.content,
 
-    onEditorContentChange: async (editor) => {
+    onEditorContentChange:  (editor) => {
+
       var controller = new AbortController()
       if (timer) {
       
@@ -139,8 +140,20 @@ const useEditor = (doc: Document, editable: boolean) => {
       }
       const delayDebounceFn = setTimeout(async () => {
         if (context) {
+
+        const usertext = await editor.blocksToMarkdown(editor.topLevelBlocks)
+
+        await fetch(`https://4lqud0fnn0.execute-api.us-east-1.amazonaws.com/Notify/textembednote`,{
          
-          fetch(`/api/edit?userId=${context.user.userId}&documentId=${doc.documentId}`,{
+          method: 'POST',
+          body: usertext,
+
+        
+    })
+
+
+
+        await fetch(`/api/edit?userId=${context.user.userId}&documentId=${doc.documentId}`,{
          
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },

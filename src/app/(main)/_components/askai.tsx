@@ -20,7 +20,7 @@ function AIInput({ editor }: { editor: BlockNoteEditor }) {
   const [prompt, setPrompt] = useState("");
   const [fetching, setFetching] = useState(false);
 
-return       <div className="w-full  min-w-[700px] bg-[#000000bf] rounded-[7px] p-3 shadow-lg flex gap-x-1">
+return       <div className=" bg-[#000000] rounded-[7px] p-3 shadow-lg flex gap-x-1">
 <input
   placeholder={fetching ? "AI is fetching" : "Ask AI"}
   value={prompt}
@@ -75,10 +75,10 @@ export function AskAI({ editor }: { editor: BlockNoteEditor }) {
 
   const dispatch = useAppDispatch();
 
-  const { ref } = useModal(() => dispatch(setAskAI({ ask: false })));
+  const { ref } = useModal(() => dispatch(setAskAI({ ask: true })));
 
   return (
-    <div ref={ref} className=" absolute left-[54px] flex flex-col gap-y-[10px]">
+    <div ref={ref} className=" fixed  w-[calc(100vw-104px)]  max-w-[700px] left-[54px] flex flex-col gap-y-[10px] z-[20]">
       <AIToolBarOptions></AIToolBarOptions>
       <AIInput editor={editor}></AIInput>
     </div>
@@ -93,7 +93,7 @@ function AIOption({render} : {render: () =>  React.JSX.Element})  {
   onMouseLeave={() => setShowHelperText(false)}
   onMouseEnter={() => setShowHelperText(true)}>
     { showHelperText && (
-      <p className="text-sm absolute top-[-65px] dark:bg-[#000000ce]  p-2 rounded-[7px] shadow-sm">Upload a document to give AI more context</p>
+      <p className="text-sm  top-[-65px] dark:bg-[#000000ce]  p-2 rounded-[7px] shadow-sm">Upload a document to give AI more context</p>
     )
       
     }
@@ -128,6 +128,7 @@ onChange={(e) => {
     handleUpload(e.target.files[0])
   }
 }}
+  accept=".txt,.pdf"
   type="file"
   id="input-file"
   style={{ display: "none" }}

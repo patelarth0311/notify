@@ -90,7 +90,6 @@ const Editor = ({ doc, editable }: EditorProps) => {
       <BlockNoteView
         spellCheck={true}
         theme={theme}
-        className="bg-[inherit]"
         editor={editor}
         style={{position: "relative"}}
       >
