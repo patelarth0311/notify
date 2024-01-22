@@ -10,7 +10,7 @@ import { Document } from "../requests";
 
 export const askAISlicer = createSlice({
   name: "askAIHander",
-  initialState: true,
+  initialState: false,
   reducers: {
     setAskAI: (state, action) => {
       

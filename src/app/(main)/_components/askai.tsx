@@ -20,7 +20,7 @@ function AIInput({ editor }: { editor: BlockNoteEditor }) {
   const [prompt, setPrompt] = useState("");
   const [fetching, setFetching] = useState(false);
 
-return       <div className=" bg-[#000000] rounded-[7px] p-3 shadow-lg flex gap-x-1">
+return       <div className="w-full  max-w-[700px] bg-[#000000bf] rounded-[7px] p-3 shadow-lg flex gap-x-1">
 <input
   placeholder={fetching ? "AI is fetching" : "Ask AI"}
   value={prompt}
@@ -75,10 +75,10 @@ export function AskAI({ editor }: { editor: BlockNoteEditor }) {
 
   const dispatch = useAppDispatch();
 
-  const { ref } = useModal(() => dispatch(setAskAI({ ask: true })));
+  const { ref } = useModal(() => dispatch(setAskAI({ ask: false })));
 
   return (
-    <div ref={ref} className=" fixed  w-[calc(100vw-104px)]  max-w-[700px] left-[54px] flex flex-col gap-y-[10px] z-[20]">
+    <div ref={ref} className=" absolute  w-full left-[54px] flex flex-col gap-y-[10px] z-[20]">
       <AIToolBarOptions></AIToolBarOptions>
       <AIInput editor={editor}></AIInput>
     </div>
