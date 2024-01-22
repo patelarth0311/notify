@@ -56,7 +56,7 @@ return       <div className="w-full   bg-[#000000bf] rounded-[7px] p-3 shadow-lg
 
       editor.insertBlocks([askAI], currentBlock, "after");
     });
-    setPrompt("");
+   
   }}
 >
   {!fetching && (
@@ -78,7 +78,7 @@ export function AskAI({ editor }: { editor: BlockNoteEditor }) {
   const { ref } = useModal(() => dispatch(setAskAI({ ask: false })));
 
   return (
-    <div ref={ref} className=" absolute max-w-[700px]  w-full left-[54px] flex flex-col gap-y-[10px] z-[20]">
+    <div ref={ref} className=" absolute max-w-[400px]  w-full left-[54px] flex flex-col gap-y-[10px] z-[20]">
       <AIToolBarOptions></AIToolBarOptions>
       <AIInput editor={editor}></AIInput>
     </div>
@@ -89,15 +89,14 @@ function AIOption({render} : {render: () =>  React.JSX.Element})  {
 
   const [showHelperText, setShowHelperText] = useState(false)
 
-  return <div  className="flex flex-col gap-y-[10px] "
-  onMouseLeave={() => setShowHelperText(false)}
-  onMouseEnter={() => setShowHelperText(true)}>
+  return <div  className="flex flex-col gap-y-[10px] ">
     { showHelperText && (
-      <p className="text-sm w-[auto] top-[-65px] dark:bg-[#000000ce]  p-2 rounded-[7px] shadow-sm">Upload a document to give AI more context</p>
+      <p className="absolute text-sm w-[auto] top-[-65px] dark:bg-[#000000ce]  p-2 rounded-[7px] shadow-sm">Upload a document to give AI more context</p>
     )
       
     }
-    <div className="dark:bg-[#000000ce] w-[35px] rounded-[7px]  shadow-lg p-1  backdrop-blur-lg ">
+    <div  onMouseLeave={() => setShowHelperText(false)}
+  onMouseEnter={() => setShowHelperText(true)} className="dark:bg-[#000000ce] w-[35px] rounded-[7px]  shadow-lg p-1  backdrop-blur-lg ">
     {render()}
     </div>
   
