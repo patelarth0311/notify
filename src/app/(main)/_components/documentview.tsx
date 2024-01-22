@@ -26,53 +26,20 @@ export const DocumentView = ({ documentId }:  { documentId: string } ) => {
     const context = useContext(UserContext)
   
     useEffect(() => {
+ 
         if (context) {
           getDocument<{ Items: Document[] }>(documentId, context.user.userId).then((res) => {
             setDoc(res.Items[0]);
             setLoading(false);
         });
       }
-    
+      
     }, [documents]);
   
     return (
       <div className="dark:bg-[#191919] flex relative flex-col h-full w-full overflow-hidden ">
         <Navbar loading={loading} title={doc ? doc.documentName : ""}>
-          {doc && (
-            <>
-              <button>
-                <Image
-                  style={{
-                    width: 20,
-                    height: 20,
-                  }}
-                  onClick={() => {
-                    if (context) {
-                      favorite<Document>(doc.documentId, context.user.userId).then((res) => {
-                        dispatch(setADocument({ updatedDocument: res }));
-                      });
-                    }
-                  }}
-                  alt={"menu"}
-                  width={20}
-                  height={20}
-                  src={doc.starred ? "/fillstar.svg" : "/star.svg"}
-                ></Image>
-              </button>
-              <button>
-                <Image
-                  style={{
-                    width: 20,
-                    height: 20,
-                  }}
-                  alt={"menu"}
-                  width={20}
-                  height={20}
-                  src={"/more.svg"}
-                ></Image>
-              </button>
-            </>
-          )}
+         <div></div>
         </Navbar>
   
         <div className="  overflow-auto w-full h-full">

@@ -11,7 +11,6 @@ import {
   defaultBlockSchema,
   defaultProps,
   BlockSchema,
-  StyledText,
 } from "@blocknote/core";
 import {
   Theme,
@@ -133,11 +132,6 @@ const useEditor = (doc: Document, editable: boolean) => {
     initialContent: doc.content,
 
     onEditorContentChange: async (editor) => {
-
-      var idk = editor.getTextCursorPosition().block.content
-      
-      
-
       var controller = new AbortController()
       if (timer) {
       
@@ -145,8 +139,7 @@ const useEditor = (doc: Document, editable: boolean) => {
       }
       const delayDebounceFn = setTimeout(async () => {
         if (context) {
-          
-           
+         
           fetch(`/api/edit?userId=${context.user.userId}&documentId=${doc.documentId}`,{
          
               method: 'POST',
