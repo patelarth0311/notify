@@ -10,6 +10,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { logInWithTokens } from "./(main)/_components/userreg";
 import { useRouter } from "next/navigation";
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from '@vercel/analytics/react';
 
 export default function RootLayout({
   children,
@@ -55,6 +56,7 @@ export default function RootLayout({
         <Provider store={store}>
           <body className="h-full w-full">{children}</body>
           <SpeedInsights />
+          <Analytics />
 
         </Provider>
       </UserContext.Provider>
