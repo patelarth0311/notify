@@ -16,8 +16,9 @@ const useModal = (action: () => void) => {
 
         var handleClickOutside = (e: MouseEvent) => {
             if ( ref.current && !ref.current.contains(e.target as Node)) {
-             action()
-            
+                action()
+               
+                
              
             } 
         }

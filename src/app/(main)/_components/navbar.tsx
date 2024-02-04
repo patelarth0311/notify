@@ -10,8 +10,6 @@ import { useState } from "react";
 import { memo } from "react";
 import Skeleton from "./skeleton";
 
-import { Island } from "./island";
-
 interface NavbarProps {
   children: React.ReactNode;
   title: string;
@@ -25,6 +23,9 @@ const Navbar = memo(({ children, title, loading }: NavbarProps) => {
   return (
     <nav className="flex  items-center h-[50px] dark:bg-[#191919] flex-row justify-between gap-x-3  max-w-[100vw] p-3 ">
       {!isOpen && (
+        <>
+        { loading ?   <Skeleton style="w-[30px] h-[30px] rounded-[5px]"></Skeleton> :
+
         <button
           className="min-w-[30px] "
           onClick={(e) => {
@@ -48,6 +49,9 @@ const Navbar = memo(({ children, title, loading }: NavbarProps) => {
             src={!isHover ? "/menu.svg" : "/chevright.svg"}
           ></Image>
         </button>
+
+        }
+        </>
       )}
 
       {loading ? (

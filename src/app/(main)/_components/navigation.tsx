@@ -1,3 +1,4 @@
+"use client"
 import React, { useContext, useEffect } from "react";
 import { NavItem } from "./navitem";
 import { DocumentItem } from "./documentitem";
@@ -132,40 +133,16 @@ function UserModal() {
 text="Sign out"
 icon={"/logout.svg"}
 action={() => {
-  signOut(() => router.push("/"))
+  fetch('/api/user/logout').then((res) => {
+    router.push("/")
+  })
 }}
 ></NavItem>
   </div>
   </div>
 }
 
- function signOut(action: () => void) {
 
-
-  var poolData = {
-    UserPoolId: "us-east-1_qYqgHGG06",
-    ClientId: "7qinghbiqlttnjthgkgh4cesnj",
-  };
-  var userPool = new CognitoUserPool(poolData);
-  try {
-    const cognitoUser = userPool.getCurrentUser();
-    if (cognitoUser) {
-       cognitoUser.signOut();
-    }
-
-    // Clear local storage or session storage
-    localStorage.clear();
-    sessionStorage.clear();
-    action()
-    // Optionally, redirect to a specific page after logout
-
-  } catch (error) {
-    console.error('Error signing out:', error);
-  }
-
-  // Clear local storage or session storage
-
-}
 
 function LoggedNav() {
 

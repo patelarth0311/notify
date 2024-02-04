@@ -1,4 +1,4 @@
-
+"use client"
 
 import useModal from "../hooks/use-modal";
 import { useAppDispatch, useAppSelector } from "../hooks/store";
